@@ -1,0 +1,4 @@
+Version:
+1.0: adding spring security
+2.0: adding registration verification accessibility
+3.0: Adding functionality to add data from registration to postgresql db.

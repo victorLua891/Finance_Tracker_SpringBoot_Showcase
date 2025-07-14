@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- Link to common CSS -->
+    <link rel="stylesheet" th:href="@{/css/common/style.css}">
+    <style>
+        /* Import Fonts (if not already in style.css) */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap');
+
+        /* --- New styles for the login page --- */
+        body {
+            /* Ensure body takes full viewport height for centering */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center;     /* Center vertically */
+            min-height: 100vh;       /* Make sure body takes full viewport height */
+            margin: 0;
+            background-color: #f7f7f7; /* Consistent light background */
+            font-family: 'Open Sans', sans-serif; /* Consistent font */
+            color: #333;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            width: 100%;
+            max-width: 400px; /* Limit max width for readability */
+            text-align: center; /* Center h2, p, and the form itself (if it's inline-block) */
+        }
+
+        .login-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            color: #333;
+            margin-top: 0; /* Remove default h2 top margin */
+            margin-bottom: 30px; /* Space below heading */
+        }
+
+        form {
+            display: flex; /* Use flexbox for form elements */
+            flex-direction: column; /* Stack them vertically */
+            gap: 15px; /* Space between form groups */
+        }
+
+        .form-group { /* A class for label/input pairs */
+            text-align: left; /* Align labels/inputs within their group */
+        }
+
+        label {
+            display: block; /* Make labels take full width */
+            margin-bottom: 8px; /* Space below label */
+            font-weight: 600; /* Slightly bolder labels */
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 20px); /* Full width minus padding */
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #7851B9; /* Highlight border on focus with your brand color */
+            outline: none; /* Remove default outline */
+        }
+
+        button[type="submit"] { /* Changed to button, easier to handle JS */
+            background-color: #7851B9; /* Your brand purple for the login button */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px; /* Space above button */
+            width: 100%; /* Make button full width of form */
+        }
+
+        button[type="submit"]:hover {
+            background-color: #5d3f92; /* Slightly darker purple on hover */
+        }
+
+        /* Message styling */
+        .message { /* Unified class for all messages */
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none; /* Hidden by default, shown by JS */
+        }
+        .message.error {
+            color: #d9534f; /* A standard error red */
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+        .message.success {
+            color: #5cb85c; /* A standard success green */
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .login-container p {
+            margin-top: 25px; /* Space above "Don't have an account?" */
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .login-container p a {
+            color: #007bff; /* Standard link blue */
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-container p a:hover {
+            text-decoration: underline;
+        }
+
+        .login-title{
+            font-size: 2em;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="login-title">Finance Tracker</div>
+
+    <!-- Unified message display area -->
+    <div id="messageDisplay" class="message"></div>
+
+    <form id="loginForm" action="api/auth/login" method="post"> <!-- Removed th:action and method -->
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required/>
+        </div>
+        <div>
+            <button type="submit">Login</button> <!-- Changed to button type="submit" -->
+        </div>
+    </form>
+    <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+</div>
+
+<!-- Link to your JavaScript file -->
+<script th:src="@{/js/login.js}"></script>
+
+</body>
+</html>

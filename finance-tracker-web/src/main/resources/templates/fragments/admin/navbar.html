@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<nav th:fragment="navbar">
+  <div class="navbar-brand">Finance Tracker</div>
+  <div>Admin Panel</div>
+  <ul>
+    <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
+    <li><a th:href="@{/admin/users}">User Management</a></li>
+    <li><a th:href="@{/admin/account-management}">Bank Account Management</a></li>
+    <li><a href="#" id="adminLogoutBtn">Logout</a></li>
+  </ul>
+</nav>
+
+<script>
+  document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+      // Option 1: Redirect to a backend logout endpoint (recommended for proper session invalidation)
+      window.location.href = '/api/auth/logout'; // You'll need to create this endpoint
+
+      // Option 2: If no backend logout, simply redirect, but note the JWT cookie will remain valid until expiry
+      // window.location.href = '/admin/login';
+  });
+</script>
+</body>
+</html>

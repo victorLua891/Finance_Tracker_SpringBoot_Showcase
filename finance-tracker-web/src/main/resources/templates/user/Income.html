@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Management</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/income.css">
+</head>
+<style>
+    .main-page-wrapper{
+        display: flex;
+        justify-content: center;
+
+        /*margin-top: 2rem;;
+          width: 40%;
+          margin-left: 20%;
+          min-height: 60vh;
+          justify-content: center;*/
+          /*margin-right: 20%;*/
+    }
+    /*.income-wrapper-container{
+        min-height: 40vh;
+    }*/
+    /*.content-wrapper{
+        min-height: 35vh;
+    }*/
+    .filter-section{
+        /*margin: 1.25rem;*/
+        display: flex;
+        /*justify-content: center;*/
+        align-items: center;
+    }
+
+    .form-control{
+        padding: 0.5rem 0.5rem;
+        border-radius: 0.5rem;
+        margin-left: 0.5rem;
+    }
+
+    /* Basic table styling, similar to your income.css or general style.css */
+    #income-records-container {
+        width: 100%;
+        border-collapse: collapse;
+        /*margin-top: 20px;*/
+    }
+
+    #income-records-container th,
+    #income-records-container td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #income-records-container th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+
+</style>
+<body>
+<header th:replace="~{fragments/user/navbar :: navbar}"></header>
+
+<main>
+<!--    <h1>Income Management</h1>-->
+<!--    <hr class="title-underline">-->
+    <div class="main-page-wrapper">
+        <div>
+            <h2>Income Management</h2>
+            <div class="filter-section">
+                <label for="viewAccountSelect">Account:</label>
+                <select id="viewAccountSelect" class="form-control">
+                    <option value="">Select an account</option>
+                </select>
+            </div>
+
+            <div class="income-wrapper-container">
+                <div class="content-wrapper">
+                    <!--            <h2>Income Management</h2>-->
+                    <!--            <div class="filter-section">-->
+                    <!--                <label for="viewAccountSelect">Account:</label>-->
+                    <!--                <select id="viewAccountSelect" class="form-control">-->
+                    <!--                    <option value="">Select an account</option>-->
+                    <!--                </select>-->
+                    <!--            </div>-->
+
+                    <!--        <button id="addIncomeButton" class="add-button">Add New Income</button>-->
+
+
+                    <div id="income-records-container">
+                        <p class="message-text">Please select an account to view its income records.</p>
+                        <table id="incomeTransactionsTable">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Account</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <p id="noIncomeMessage" class="message-text" style="display: none;">No income records found for this account.</p>
+                    </div>
+
+
+                    <div id="incomeModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button">&times;</span>
+                            <h2>Add Income Transaction</h2>
+                            <form id="incomeForm">
+                                <div class="form-group">
+                                    <label for="selectAccountModal">Account:</label>
+                                    <select id="selectAccountModal" name="accountId" required>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="incomeAmount">Amount:</label>
+                                    <input type="number" id="incomeAmount" name="amount" step="0.01" min="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="incomeDescription">Description:</label>
+                                    <input type="text" id="incomeDescription" name="description" maxlength="255">
+                                </div>
+                                <div class="form-group">
+                                    <label for="incomeDate">Date:</label>
+                                    <input type="date" id="incomeDate" name="transactionDate" required>
+                                </div>
+                                <button type="submit" class="submit-button">Record Income</button>
+                            </form>
+                            <p id="incomeMessage" class="message-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!--    <button id="addIncomeButton" class="add-button">Add New Income</button>-->
+            <button id="addIncomeButton" class="add-button">+</button>
+        </div>
+
+
+    </div>
+
+</main>
+
+<footer th:replace="~{fragments/user/footer :: footer}"></footer>
+
+<script src="/js/income.js"></script>
+</body>
+</html>

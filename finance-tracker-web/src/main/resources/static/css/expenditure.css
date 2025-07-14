@@ -1,0 +1,146 @@
+/* expenditure.css */
+
+/* Basic table styling, similar to your income.css or general style.css */
+#expenditureTransactionsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#expenditureTransactionsTable th,
+#expenditureTransactionsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#expenditureTransactionsTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Modal styling (you might already have this in style.css, but for specific adjustments) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px; /* Max width for readability */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select {
+    width: calc(100% - 20px); /* Adjust padding */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.add-button{
+    display: block; /* Make button full width of its container */
+    width: fit-content; /* Or a fixed width like 200px */
+    padding: 6px 18px;
+    margin: 30px ; /* Center the button */
+    margin-left: auto;   /* Pushes element to the right */
+    margin-right: 20px;     /* Aligns it to the right edge with no margin */
+    margin-bottom: 0; /*trying to match for the footer. */
+    background-color: #7851B9; /* Purple */
+    color: white;
+    border: none;
+    border-radius: 35px;
+    font-size: 3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    /*position: absolute;
+    right: 20px;
+    bottom: 20px;*/
+    /*margin-left: 60w;*/
+
+    /* Positioning */
+    /*position: absolute;
+    right: -60px;*/   /* Distance from the right edge of <main> */
+}
+
+.submit-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.add-button:hover {
+    background-color: #00308E;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+
+
+.message-text {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.message-text[style*="red"] {
+    background-color: #ffe0e0;
+    border: 1px solid #ffb3b3;
+    color: #cc0000;
+}
+
+.message-text[style*="green"] {
+    background-color: #e0ffe0;
+    border: 1px solid #b3ffb3;
+    color: #008000;
+}

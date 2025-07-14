@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/common/style.css}">
+  <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+  <style>
+    /* BASIC LAYOUT STYLES - You can move these to admin/admin.css */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex; /* Use Flexbox for main layout */
+        min-height: 100vh; /* Ensure body takes full viewport height */
+        background-color: #f4f4f4;
+    }
+
+    .sidebar {
+        width: 250px; /* Fixed width for the sidebar */
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        flex-shrink: 0; /* Prevent sidebar from shrinking */
+    }
+
+    .sidebar .navbar-brand { /* Style for the "Finance Tracker" text in sidebar */
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .sidebar div:nth-of-type(2) { /* Style for "Admin Panel" text */
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #ccc;
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 10px;
+    }
+
+    .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+        display: block; /* Make the whole list item clickable area */
+        padding: 8px 0;
+        transition: background-color 0.3s ease;
+    }
+
+    .sidebar ul li a:hover {
+        background-color: #555;
+        border-radius: 4px;
+    }
+
+    .main-content {
+        flex-grow: 1; /* Main content takes remaining space */
+        padding: 20px;
+        overflow-y: auto; /* Enable scrolling if content overflows */
+    }
+
+    .main-content h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div th:replace="~{fragments/admin/navbar :: navbar}"></div>
+</div>
+
+<div class="main-content">
+  <h1>Dashboard Overview</h1>
+  <p>This is where you'll see key metrics and summaries for the finance tracker application.</p>
+
+  <section class="dashboard-stats">
+    <h2>Current Statistics</h2>
+    <div class="stat-card">Total Users: <strong>100</strong></div>
+    <div class="stat-card">Total Accounts: <strong>150</strong></div>
+    <div class="stat-card">Pending Approvals: <strong>5</strong></div>
+  </section>
+
+  <section class="quick-actions">
+    <h2>Quick Actions</h2>
+    <ul>
+      <li><a th:href="@{/admin/users/add}">Add New User</a></li>
+      <li><a th:href="@{/admin/reports}">Generate Reports</a></li>
+    </ul>
+  </section>
+
+</div>
+
+<script th:src="@{/js/admin/admin-logout.js}"></script>
+</body>
+</html>

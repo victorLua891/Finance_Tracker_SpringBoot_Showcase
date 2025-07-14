@@ -1,0 +1,24 @@
+//My AddBudget Code Design Decisions:
+/**
+ * verification check: for what I am not sure.
+ * try{
+ *  //I am hoping the try catch block would resolve the failed return value.
+ *  //Success cond.
+ *  //if not then I am not sure what to do.
+ *  //1. We would need to have a user first, get the user & acc_id and use findById (UserRepo) to get data from database
+ *  //2. Once user retrieved via findById,
+ *  //Goal here: find the account's amount, find the amt from user & acc_id -> use amt to check against the budget.
+ *  //3. FindById for budget, the question is how you plan to implement the budget table.
+ //QUESTION: do we actually want to make a budget web? why not we just implement a bank manager like maybank or etc u know.
+ *  // why not we focus on Users & Accounts first. We just focus on this, Implement user and accounts first.
+ *  //If we cannot implement budget then screw it.
+ * - would we have two rows? One
+ *  //return Actual budget or success message.
+ *  //Else:
+ *  //1.
+ * }catch{
+ *  //not much logic or I cant think of any atm.
+ *  //return failed message?
+ * }
+ *
+ * */

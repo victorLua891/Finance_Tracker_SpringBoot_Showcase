@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Finance Tracker Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .dashboard-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center; /* Vertically align items */
+            margin-top: 20px;
+        }
+
+        .dashboard-item {
+            text-align: center;
+        }
+
+        .chart-container {
+            width: 150px; /* Adjust as needed */
+            height: 150px; /* Adjust as needed */
+            margin: 10px auto;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+<header th:replace="~{fragments/user/navbar :: navbar}"></header>
+<div class="dashboard-container">
+    <h2>Savings</h2>
+    <div class="dashboard-row">
+        <div class="dashboard-item">
+            <h3>Expenditure</h3>
+            <div class="chart-container">
+                <canvas id="expenditureChart"></canvas>
+            </div>
+            <p th:text="${thisMonthExpenditure}"></p>
+        </div>
+        <div class="dashboard-item">
+            <h3>Budget</h3>
+            <div class="chart-container">
+                <canvas id="budgetChart"></canvas>
+            </div>
+            <p th:text="${thisMonthBudgetPlan}"></p>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments/user/footer :: footer}"></footer>
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        // Expenditure Chart
+        var expenditureCtx = document.getElementById('expenditureChart').getContext('2d');
+        var thisMonthExpenditure = /*[[${thisMonthExpenditure}]]*/ 0; // Get data from Thymeleaf
+        var thisMonthBudgetPlanForExpenditure = /*[[${thisMonthBudgetPlanForExpenditure}]]*/ 100; // Get budget relevant to expenditure
+        var expenditureChart = new Chart(expenditureCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Spent', 'Remaining'],
+                datasets: [{
+                    data: [thisMonthExpenditure, Math.max(0, thisMonthBudgetPlanForExpenditure - thisMonthExpenditure)],
+                    backgroundColor: ['#FF6384', '#36A2EB'],
+                    hoverBackgroundColor: ['#FF6384', '#36A2EB'],
+                    borderWidth: 1,
+                    borderColor: '#ccc'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutoutPercentage: 70, // Adjust for donut hole size
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+                                return previousValue + currentValue;
+                            });
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = Math.round((currentValue / total) * 100);
+                            return data.labels[tooltipItem.index] + ': ' + currentValue + ' (' + percentage + '%)';
+                        }
+                    }
+                }
+            }
+        });
+
+        // Budget Chart
+        var budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        var thisMonthBudgetPlan = /*[[${thisMonthBudgetPlan}]]*/ 100; // Get total budget from Thymeleaf
+        var budgetChart = new Chart(budgetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Budgeted'],
+                datasets: [{
+                    data: [thisMonthBudgetPlan],
+                    backgroundColor: ['#4BC0C0'],
+                    hoverBackgroundColor: ['#4BC0C0'],
+                    borderWidth: 1,
+                    borderColor: '#ccc'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutoutPercentage: 70, // Adjust for donut hole size
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            return data.labels[tooltipItem.index] + ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

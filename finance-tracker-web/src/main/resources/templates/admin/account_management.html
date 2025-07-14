@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Account Management</title>
+  <link rel="stylesheet" th:href="@{/css/common/style.css}">
+  <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+  <style>
+    /* src/main/resources/static/css/admin/admin.css */
+
+    /* Basic Layout (Apply to body directly if you want full page flex) */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex; /* Makes direct children (sidebar, main-content) flex items */
+        min-height: 100vh; /* Ensure body takes full viewport height */
+        background-color: #f4f4f4; /* Light grey background for the whole page */
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+        width: 250px; /* Fixed width for the sidebar */
+        background-color: #333; /* Dark background */
+        color: white;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Subtle shadow */
+        flex-shrink: 0; /* Prevent sidebar from shrinking */
+    }
+
+    /* Navbar branding within sidebar */
+    .sidebar .navbar-brand {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center; /* Center the brand name */
+    }
+
+    /* Admin Panel text within sidebar */
+    .sidebar div:nth-of-type(2) { /* Adjust selector if you give this div a class */
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #ccc;
+        text-align: center;
+    }
+
+    /* Navigation list in sidebar */
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 10px;
+    }
+
+    .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+        display: block; /* Make the whole list item clickable area */
+        padding: 8px 10px; /* Add horizontal padding */
+        transition: background-color 0.3s ease;
+        border-radius: 4px; /* Slightly rounded corners */
+    }
+
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active { /* Add an active state if needed */
+        background-color: #555;
+    }
+
+    /* Main Content Area */
+    .main-content {
+        flex-grow: 1; /* Main content takes all remaining space */
+        padding: 20px 30px; /* Padding around the content */
+        overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    }
+
+    .main-content h1 {
+        color: #333;
+        margin-bottom: 25px;
+        font-size: 28px;
+        border-bottom: 1px solid #eee; /* Subtle separator */
+        padding-bottom: 15px;
+    }
+
+    /* General Section Styling (cards) */
+    .card {
+        background-color: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 30px; /* Space between sections */
+    }
+
+    .card h2 {
+        color: #007bff;
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 22px;
+    }
+
+    /* Form Group Styling */
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .form-control {
+        width: calc(100% - 22px); /* Full width minus padding and border */
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box; /* Include padding/border in element's total width/height */
+    }
+
+    .form-control:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+
+    /* Table Styling */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        border: 1px solid #dee2e6;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #e9ecef;
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    .table tbody tr:hover {
+        background-color: #e2e6ea;
+    }
+
+    /* Message Styles */
+    .info-message {
+        margin-top: 15px;
+        padding: 10px 15px;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #e2f0f7; /* Light blue for info */
+        color: #006080;
+        border: 1px solid #b3e0ed;
+    }
+
+    /* Add more specific styles for elements like buttons within the table or other sections */
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <div th:replace="~{fragments/admin/navbar :: navbar}"></div>
+</div>
+
+<div class="main-content"> <h1>Admin Account Management</h1>
+
+  <section class="user-selection-section card"> <h2>Select User</h2>
+    <div class="form-group">
+      <label for="userSelect">Choose a User:</label>
+      <select id="userSelect" class="form-control">
+        <option value="">-- Select User --</option>
+      </select>
+    </div>
+    <button id="viewUserAccountsBtn" class="btn btn-primary">View User Accounts</button>
+  </section>
+
+  <section class="user-accounts-display-section card" style="display: none;"> <h2>Accounts for <span id="selectedUserName"></span></h2>
+    <table class="table" id="userAccountsTable">
+      <thead>
+      <tr>
+        <th>Account ID</th>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>Currency</th>
+        <th>Actions</th> </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <p id="noAccountsMessage" class="info-message" style="display: none;">No accounts found for this user.</p>
+  </section>
+
+  <section class="add-account-section card"> <h2>Add Bank Account for Selected User</h2>
+    <form id="addAccountForm">
+      <div class="form-group">
+        <label for="addAccountName">Account Name:</label>
+        <input type="text" id="addAccountName" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="addAccountBalance">Initial Balance:</label>
+        <input type="number" id="addAccountBalance" class="form-control" step="0.01" value="0.00" required>
+      </div>
+      <div class="form-group">
+        <label for="addAccountCurrency">Currency (e.g., USD, MYR):</label>
+        <input type="text" id="addAccountCurrency" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-success">Add Bank Account</button>
+    </form>
+    <p id="addAccountMessage" class="info-message" style="display: none;"></p>
+  </section>
+
+</div> <script th:src="@{/js/common/common.js}"></script>
+<script th:src="@{/js/admin/account_management.js}"></script>

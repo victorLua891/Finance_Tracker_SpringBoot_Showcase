@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your Finance Tracker - Clean & Professional</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        /* Your specific <style> block CSS here, though ideally it moves to style.css */
+        /* Import Fonts - if not already in style.css or global CSS */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap');
+
+        /* Remove .banner-section style if not wrapping hero */
+        /* .banner-section{
+            outline: none;
+            border: 1px solid lightgrey;
+            border-radius: 10px;
+        } */
+
+        /* Remove dashboard styles if not using that commented-out section */
+        .dashboard{ /* ... */ }
+
+        /* Any other specific styles */
+        /* --- Global Styles & Resets --- */
+
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif; /* Headings with a bolder font */
+            color: #222;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        /*Commented out cause of Finance Tracker Logo.
+        Ori. Usage: for register button. */
+        /*a {
+            color: #007bff; /* Standard link blue */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3; /* Darker blue on hover */
+            text-decoration: underline;
+        }*/
+
+        .container { /* A reusable container for content width */
+            max-width: 1200px; /* Max width for content */
+            margin: 0 auto; /* Center the container */
+            padding: 0 10px; /* Some padding on the sides */
+        }
+
+        /* --- Header & Navbar (Assuming this is handled by your fragment) --- */
+        /* Ensure your header/navbar has a distinct background and sufficient height */
+        header {
+            background-color: #fff; /* White background for header */
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+            display: flex;
+            justify-content: space-between; /* Pushes logo to left, nav to right */
+            align-items: center; /* Vertically centers items */
+            position: sticky; /* Make it sticky if desired */
+            top: 0;
+            z-index: 1000;
+        }
+
+        .finance-tracker-logo { /* Assuming a class for your "FINANCE TRACKER" text */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5em;
+            color: #7851B9; /* Your purple brand color */
+            padding-left: 20px; /* Align with container padding */
+        }
+
+        .main-nav { /* This should be the container for Dashboard, Accounts, etc. */
+            display: flex;
+            align-items: center; /* Vertically center nav links */
+            padding-right: 20px; /* Align with container padding */
+        }
+
+        .main-nav a {
+            margin-left: 25px; /* Spacing between nav items */
+            font-weight: 600;
+            color: #555;
+        }
+
+        .main-nav a:hover {
+            color: #7851B9; /* Hover effect with your brand color */
+            text-decoration: none;
+        }
+
+        .main-nav .logout-btn { /* Style your Logout button */
+            background-color: #f44336; /* Red for logout */
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-left: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .main-nav .logout-btn:hover {
+            background-color: #d32f2f;
+            text-decoration: none;
+        }
+
+        /* --- Main Content Area --- */
+        main {
+            padding-top: 40px; /* Space below the header */
+            padding-bottom: 40px; /* Space above the footer */
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            background-color: #7851B9; /* Your brand purple */
+            color: white;
+            padding: 80px 0; /* Vertical padding */
+            text-align: center; /* Center content */
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Deeper shadow */
+            border-radius: 10px; /* Rounded corners for the entire hero banner */
+            /* If you want a subtle pattern, add it here */
+            /* background-image: url('your-pattern.png'); */
+            /* background-size: cover; */
+        }
+
+        .hero-container {
+            max-width: 800px; /* Constrain hero text width */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 3.5em; /* Larger, impactful title */
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-button {
+            display: inline-block; /* For button styling */
+            background-color: #FFD700; /* A bright, contrasting color (gold/yellow) */
+            color: #333; /* Dark text on bright button */
+            padding: 15px 30px;
+            border-radius: 50px; /* Pill-shaped button */
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px); /* Slight lift effect */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            text-decoration: none; /* Remove underline on hover */
+        }
+
+        /* --- Features Section (Uncomment and style this) --- */
+        .features-section {
+            padding: 60px 0;
+            background-color: #fff;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .features-heading {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: #7851B9; /* Brand color for heading */
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: 30px; /* Space between cards */
+            max-width: 1200px;
+            margin: 0 auto; /* Center the grid */
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        /* Add icons - you'd need to link a font-awesome or similar library in your <head> */
+        /* .feature-card::before {
+            content: '\f007'; // Example Font Awesome icon for user (replace with actual icon codes)
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 2.5em;
+            color: #7851B9;
+            margin-bottom: 15px;
+            display: block;
+        } */
+
+
+        /* --- Footer Section --- */
+        .footer-section {
+            background-color: #333; /* Dark background */
+            color: #f7f7f7; /* Light text */
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px; /* Space above footer */
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section p {
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .footer-links a {
+            color: #a0a0a0; /* Lighter grey for footer links */
+            margin: 0 15px;
+            font-size: 0.9em;
+        }
+
+        .footer-links a:hover {
+            color: #fff; /* White on hover */
+            text-decoration: underline;
+        }
+
+        /* --- Placeholder/Utility Styles (remove 'Registration Section' div) --- */
+        .banner-section {
+            /* This was around your hero and registration.
+               If hero has its own styling, this might be redundant.
+               You had it around your hero too, which will make the hero have
+               a border. If that's not desired, remove it around the hero.
+               I'd remove the "Registration Section" content completely if not needed.
+            */
+            border: 1px solid lightgrey; /* Example focus style */
+            border-radius: 10px; /* Match card border-radius */
+            margin-bottom: 30px; /* Space below sections */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+            outline: none; /* Remove default focus outline */
+            /* Add a custom focus style for accessibility */
+            border: 1px solid lightgrey; /* Example focus style */
+            border-radius: 10px; /* Match card border-radius */
+        }
+
+        .banner-section h2 { /* Style for placeholder headings */
+            text-align: center;
+            color: #777;
+            font-size: 1.8em;
+        }
+
+        /* Remove or repurpose these if you're not using the dashboard commented out */
+        .dashboard {
+            /* ... your dashboard styles ... */
+        }
+
+        .welcome-message { /* A new class for this container */
+            padding: 20px; /* Add some internal padding if needed */
+            margin-bottom: 20px; /* Adjust space below this entire section */
+            /* background-color: #f0f8ff; Optional: light background to differentiate */
+            /* border-radius: 8px; */
+        }
+
+        .welcome-message h2 {
+            margin-top: 0; /* Remove top margin */
+            margin-bottom: 5px; /* Reduce bottom margin to be closer to the paragraph */
+            font-size: 2em; /* Adjust font size as desired */
+            color: #333; /* Make it a darker, more prominent color */
+        }
+
+        .welcome-message p {
+            margin-top: 0; /* Remove top margin */
+            margin-bottom: 0; /* Remove bottom margin if you want it very tight */
+            font-size: 1em; /* Standard font size */
+            color: #666; /* Slightly lighter for secondary text */
+        }
+    </style>
+</head>
+<body>
+<header th:replace="~{fragments/user/navbar :: navbar}"></header>
+
+<main>
+    <div class="welcome-message container">
+        <h2>Welcome, <span th:text="${username}">User</span>!</h2>
+<!--        <p>This is a secure page.</p>-->
+    </div>
+
+    <section class="hero-section">
+        <div class="hero-container">
+            <h1 class="hero-title">Gain Clarity Over Your Finances</h1>
+            <p class="hero-subtitle">An intuitive platform designed to help you track, budget, and achieve your financial goals with ease.</p>
+<!--            <a href="/signup" class="hero-button">Sign Up for Free</a>-->
+        </div>
+    </section>
+
+    <section class="features-section container">
+        <h2 class="features-heading">Why Choose Us?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Expense Tracking</h3>
+                <p>Effortlessly record your daily expenses and categorize them for clear insights into your spending habits.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Budgeting Tools</h3>
+                <p>Create and manage budgets for different categories, helping you stay on track and achieve your financial targets.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Income Management</h3>
+                <p>Keep a clear record of all your income sources, providing a complete picture of your financial inflow.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Visual Reports</h3>
+                <p>Understand your financial data through insightful charts and graphs, making complex information easy to digest.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Goal Setting</h3>
+                <p>Define your financial goals and track your progress, motivating you to save and invest effectively.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Secure & Private</h3>
+                <p>Your financial data is protected with robust security measures, ensuring your privacy and peace of mind.</p>
+            </div>
+        </div>
+    </section>
+
+<!--    <section class="testimonials-section container">-->
+<!--        <h2 class="testimonials-heading">What Our Users Say</h2>-->
+<!--        <div class="testimonial-carousel">-->
+<!--            <div class="testimonial-card">-->
+<!--                <p>"This tracker transformed how I view my money. Highly recommended!"</p>-->
+<!--                <span>- Jane D.</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    <section class="cta-section container">-->
+<!--        <h2 class="cta-heading">Ready to Take Control of Your Finances?</h2>-->
+<!--        <a href="/signup" class="hero-button">Start Tracking Now</a>-->
+<!--    </section>-->
+
+</main>
+
+<footer th:replace="~{fragments/user/footer :: footer}"></footer>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

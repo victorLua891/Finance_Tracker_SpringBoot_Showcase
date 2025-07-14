@@ -1,0 +1,164 @@
+/* Styles for the Income page - specific elements */
+.content-wrapper {
+    max-width: 900px;
+    margin: 15px 0;
+    padding: 10px 0;
+    /*background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+}
+
+.content-wrapper h2 {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.add-button {
+
+    display: block; /* Make button full width of its container */
+    width: fit-content; /* Or a fixed width like 200px */
+    padding: 6px 18px;
+    margin: 30px ; /* Center the button */
+    margin-left: auto;   /* Pushes element to the right */
+    margin-right: 20px;     /* Aligns it to the right edge with no margin */
+    margin-bottom: 0; /*trying to match for the footer. */
+    background-color: #7851B9; /* Purple */
+    color: white;
+    border: none;
+    border-radius: 35px;
+    font-size: 3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    /*position: absolute;
+    right: 20px;
+    bottom: 20px;*/
+    /*margin-left: 60w;*/
+
+    /* Positioning */
+    /*position: absolute;
+    right: -60px;*/   /* Distance from the right edge of <main> */
+
+
+
+}
+
+.add-button:hover {
+    background-color: #00308E;
+}
+
+.add-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% from the top and centered */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more responsive */
+    max-width: 500px; /* Max width for larger screens */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Form Styling within Modal */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input[type="number"],
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select {
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-size: 1em;
+}
+
+.submit-button {
+    background-color: #007bff; /* Blue */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.message-text {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    display: none; /* Hidden by default, shown by JS */
+    text-align: center;
+}
+
+.message-text[style*="red"] {
+    background-color: #ffe0e0;
+    border: 1px solid #ff9999;
+}
+
+.message-text[style*="green"] {
+    background-color: #e0ffe0;
+    border: 1px solid #99ff99;
+}

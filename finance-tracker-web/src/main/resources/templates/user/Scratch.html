@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Your Finance Tracker - Clean & Professional</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <style>
+    /* Import Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap');
+
+    body{
+        margin: 0px 3vw;
+        padding: 0;
+    }
+
+    .navbar-logo{
+        font-family: 'Montserrat';
+        font-weight: 500;
+        color: black;
+    }
+
+    .navbar-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Lora';
+    }
+    .navbar-container a{
+        margin: 15px 0px;
+    }
+
+    .navbar-nav{
+        display: flex;
+        font-family: 'Lora';
+    }
+
+    .navbar-nav li a{
+        color: #003366;
+<!--            color: #000080;-->
+    }
+
+    .navbar-logo{
+        text-decoration: none;
+        list-style-type: none;
+    }
+
+    .navbar-nav li{
+        font-family: 'Open Sans';
+        list-style-type: none;
+        margin: 0 10px;
+
+    }
+
+    .nav-link:hover {
+        color: #008080; /* Teal on hover */
+    }
+
+    .nav-button:hover {
+        color: #008080; /* Teal on hover */
+    }
+
+    .login-btn{
+        font-family: 'Montserrat', sans-serif;
+        border-left: 1px solid black;
+        font-weight: bold;
+        color: #008080;
+        margin: 0px;
+        padding-left: 15px;
+    }
+
+    .navbar-nav li a{
+        text-decoration: none;
+    }
+
+
+
+
+
+    .saving-plan div{
+        display: flex;
+
+    }
+
+    .saving-value{
+        padding-top: 1rem;
+        padding-bottom: 1.5rem;
+        font-weight: bold;
+    }
+
+    .monthly-plan{
+        display: flex;
+        justify-content: space-between;
+<!--            justify-content: center;-->
+        align-items: center;
+    }
+
+    .monthly-plan div{
+<!--            padding: 0px 15px;-->
+    }
+
+    .expenditure-plan{
+        border-right: 1px solid grey;
+    }
+
+    /* Account Card Styling - Orange Version */
+
+    .account-card-list{
+      margin-top: 2rem;;
+      width: 80%;
+      margin-left: 10%;
+<!--      margin-right: 50%;-->
+
+    }
+
+    .account-card-list div{
+<!--        margin: 0 auto;-->
+    }
+
+    .account-card-orange {
+
+        background: linear-gradient(135deg, #FFA726 0%, #FB8C00 100%); /* Orange gradient */
+        color: #fff;
+        border-radius: 10px;
+        padding: 0 0px 30px 30px;
+<!--        margin-bottom: 15px;-->
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        overflow: hidden; /* To contain the curved background */
+        position: relative; /* For pseudo-element positioning */
+        font-family: sans-serif;
+        max-width: 1200px;
+    }
+
+    .account-card-orange::before {
+        content: '';
+        position: absolute;
+        top: 60%;
+        right: -50px;
+        width: 150px;
+        height: 150px;
+        background-color: rgba(255, 255, 255, 0.15); /* Light white for the curve */
+        border-radius: 50%;
+    }
+
+    .account-card-orange::after {
+        content: '';
+        position: absolute;
+        bottom: -30px;
+        left: -20px;
+        width: 100px;
+        height: 100px;
+        background-color: rgba(255, 255, 255, 0.1); /* Slightly darker white for another curve */
+        border-radius: 50%;
+    }
+
+    .account-name {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 8px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+    }
+
+    .account-number {
+        font-size: 1em;
+        color: #eee;
+        margin-bottom: 15px;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    }
+
+    .account-balance {
+        padding-top: 2rem;
+        font-size: 2em;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+    }
+
+    .currency {
+        margin-right: 8px;
+        font-size: 0.8em;
+        vertical-align: top;
+    }
+
+    .amount {
+        vertical-align: baseline;
+    }
+
+    .account-title{
+      font-family: sans-serif;
+      margin: 20px 10px 20px 0;
+    }
+
+    <!--    FOOTER SECTION-->
+<!--    .footer-separator{-->
+<!--      height: 200px;-->
+<!--      padding-bottom: 6rem;-->
+<!--    }-->
+
+
+    footer {
+        margin-top: 600px;
+        background-color: #fff; /* Pure white background */
+        color: #555;
+
+        padding: 30px 0; /* Slightly more padding */
+        text-align: center;
+        border-top: 1px solid #eee;
+        font-size: 0.9em;
+        position: relative; /* For positioning the repeating logo */
+        overflow: hidden; /* To contain any potential overflow */
+    }
+
+    .footer-content {
+
+        max-width: 1200px;
+        margin: 0 auto;
+        margin-top: 20px;
+        padding: 0 20px;
+        position: relative; /* To ensure text is above the logo repeat */
+        z-index: 1; /* Ensure text is on top */
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .footer-links li {
+        display: inline;
+    }
+
+    .footer-links li a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .footer-links li a:hover {
+        text-decoration: underline;
+    }
+
+    .footer-logo-repeat {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/images/logo-pattern-light.png'); /* Replace with your logo pattern image path */
+        background-repeat: repeat;
+        background-size: auto 30px; /* Adjust size as needed */
+        opacity: 0.05; /* Very subtle opacity */
+        pointer-events: none; /* Allows clicks to pass through */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .footer-links {
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+
+    }
+
+    /* Style for the button to make it a block-level element */
+    .account-card-button {
+        display: block;
+        width: 80%; /* Make it take full width of its container */
+        padding: 0; /* Remove default button padding */
+        margin-bottom: 15px; /* Add spacing between button cards */
+        border: none; /* Remove default button border */
+        background: none; /* Remove default button background */
+        text-align: inherit; /* Inherit text alignment from parent */
+        cursor: pointer; /* Indicate it's clickable */
+
+    }
+
+    /* Optional: Style hover/focus effects for the button */
+    .account-card-button:hover {
+        /* Add a subtle visual change on hover, e.g., a slightly darker shadow */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .account-card-button:focus {
+        outline: none; /* Remove default focus outline */
+        /* Add a custom focus style for accessibility */
+        border: 2px solid grey; /* Example focus style */
+        border-radius: 10px; /* Match card border-radius */
+    }
+
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="/" class="navbar-logo">FINANCE TRACKER</a>
+    <ul class="navbar-nav">
+      <!--            <li class="nav-item"><a href="/" class="nav-link">Home</a></li>-->
+      <li class="nav-item"><a href="/dashboard" class="nav-link">Dashboard</a></li>
+      <li class="nav-item"><a href="/account" class="nav-link">Accounts</a></li>
+      <li class="nav-item"><a href="/budget" class="nav-link">Budget</a></li>
+      <li class="nav-item"><a href="/" class="nav-link">Expenditure</a></li>
+      <!--            <li class="nav-item"><a href="/" class="nav-link">Transactions</a></li>-->
+      <!--            <li class="login-btn"><a href="/login" class="nav-button">User</a></li>-->
+      <li class="login-btn"><a href="/login" class="nav-button">LOGIN</a></li>
+      <!--            <li class="nav-item"><a href="/login" class="nav-button">Login</a></li>-->
+      <!--            <li class="nav-item"><a href="/signup" class="nav-button">Sign Up</a></li>-->
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="footer-separator">
+
+</div>
+
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2025 Your Finance Tracker. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="/privacy-policy">Privacy Policy</a></li>
+      <li><a href="/terms-of-service">Terms of Service</a></li>
+      <li><a href="/contact-us">Contact Us</a></li>
+    </ul>
+    <div class="footer-logo-repeat"></div>
+  </div>
+</footer>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
