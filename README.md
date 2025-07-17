@@ -11,7 +11,7 @@ Bank Account Be4 Transaction:
 
 Transaction Records:
 ![User Income](/Demo/FI_Income.JPG)
-![User Expenditure](/Demo/FI_Exp_test.JPG)
+![User Expenditure](/Demo/FI_Exp.JPG)
 
 Bank Accounts After Transaction:
 ![User Bank Acc After](/Demo/Acc_After.JPG)
