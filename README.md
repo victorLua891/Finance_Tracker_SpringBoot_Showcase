@@ -1,7 +1,7 @@
 # Finance Tracker SpringBoot ShowCase
 Description: A Finance Tracker Website Demo using SpringBoot to demonstrate My Java SpringBoot Skillset.
 
-## Product Demo
+## Project Demo
 User Interface:
 ![User Dashboard](/Demo/FI_Dashboard.JPG)
 ![User Home](/Demo/FI_Home.JPG)
