@@ -16,3 +16,9 @@ Transaction Records:
 Bank Accounts After Transaction:
 ![User Bank Acc After](/Demo/Acc_After.JPG)
 
+Admin Interface:
+Admin Login:
+![Admin Login](/Demo/FI_Admin_Login.JPG)
+
+Admin Bank Account Management for User Accounts.
+![Admin Login](/Demo/FI_Admin_Bank_Acc.JPG)
